@@ -314,7 +314,7 @@ class hospitalmanagementsystem {
             System.out.println("11. View Inventory");
             System.out.println("12. Register Staff");
             System.out.println("13. View Staff");
-            System.out.println("14. Exit");
+            System.out.println("15. Exit");
             System.out.print("Enter choice: ");
             
             int choice;
@@ -341,7 +341,7 @@ class hospitalmanagementsystem {
                 case 11 -> viewInventory();
                 case 12 -> registerStaff();
                 case 13 -> viewStaff();
-                case 14 -> {
+                case 15 -> {
                     System.out.println("Exiting... Stay Healthy!");
                     scanner.close();
                     return;
