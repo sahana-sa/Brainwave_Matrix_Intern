@@ -52,6 +52,34 @@ class Appointment {
         return "Appointment[Patient ID: " + patientId + ", Doctor: " + doctor + ", Date: " + date + "]";
     }
 }
+class Inventory {
+    private String itemName;
+    private int quantity;
+
+    public Inventory(String itemName, int quantity) {
+        this.itemName = itemName;
+        this.quantity = quantity;
+    }
+
+    public String getDetails() {
+        return "Item: " + itemName + ", Quantity: " + quantity;
+    }
+}
+class Staff {
+    private int staffId;
+    private String name;
+    private String role;
+
+    public Staff(int staffId, String name, String role) {
+        this.staffId = staffId;
+        this.name = name;
+        this.role = role;
+    }
+
+    public String getDetails() {
+        return "Staff ID: " + staffId + ", Name: " + name + ", Role: " + role;
+    }
+}
 
 class Billing {
     private int patientId;
@@ -79,6 +107,11 @@ class hospitalmanagementsystem {
     private static List<Billing> bills = new ArrayList<>();
     private static int patientCounter = 1;
     private static Scanner scanner = new Scanner(System.in);
+    private static List<Inventory> inventoryList = new ArrayList<>();
+    private static List<Staff> staffList = new ArrayList<>(); 
+    private static int staffCounter = 1; 
+
+
 
     public static void registerPatient() {
         try {
@@ -222,6 +255,48 @@ class hospitalmanagementsystem {
         }
         System.out.println("Patient not found!\n");
     }
+    public static void addInventory() {
+        System.out.print("Enter Item Name: ");
+        String itemName = scanner.nextLine();
+        System.out.print("Enter Quantity: ");
+        int quantity = scanner.nextInt();
+        scanner.nextLine();
+        inventoryList.add(new Inventory(itemName, quantity));
+        System.out.println("\nInventory added successfully!\n");
+    }
+
+    public static void viewInventory() {
+        if (inventoryList.isEmpty()) {
+            System.out.println("No inventory items found.\n");
+            return;
+        }
+        System.out.println("\nInventory List:");
+        for (Inventory item : inventoryList) {
+            System.out.println(item.getDetails());
+        }
+        System.out.println();
+    }
+
+    public static void registerStaff() {
+        System.out.print("Enter Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Role: ");
+        String role = scanner.nextLine();
+        staffList.add(new Staff(staffCounter++, name, role));
+        System.out.println("\nStaff registered successfully!\n");
+    }
+
+    public static void viewStaff() {
+        if (staffList.isEmpty()) {
+            System.out.println("No staff members found.\n");
+            return;
+        }
+        System.out.println("\nStaff List:");
+        for (Staff staff : staffList) {
+            System.out.println(staff.getDetails());
+        }
+        System.out.println();
+    }
 
     public static void main(String[] args) {
         while (true) {
@@ -235,7 +310,11 @@ class hospitalmanagementsystem {
             System.out.println("7. Show Bills");
             System.out.println("8. Update Medical History");
             System.out.println("9. View Medical History");
-            System.out.println("10. Exit");
+            System.out.println("10. Add Inventory");
+            System.out.println("11. View Inventory");
+            System.out.println("12. Register Staff");
+            System.out.println("13. View Staff");
+            System.out.println("14. Exit");
             System.out.print("Enter choice: ");
             
             int choice;
@@ -258,7 +337,11 @@ class hospitalmanagementsystem {
                 case 7 -> showBills();
                 case 8 -> updateMedicalHistory();
                 case 9 -> viewMedicalHistory();
-                case 10 -> {
+                case 10 -> addInventory();
+                case 11 -> viewInventory();
+                case 12 -> registerStaff();
+                case 13 -> viewStaff();
+                case 14 -> {
                     System.out.println("Exiting... Stay Healthy!");
                     scanner.close();
                     return;
